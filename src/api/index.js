@@ -38,4 +38,39 @@ export const mediaApi = {
     })
 };
 
+export const animeApi = {
+  getAll: (userId) =>
+    api.get('/title/anime', {
+      headers: { userId }
+    }),
+
+  search: (keyword) =>
+    api.get('/title/anime/find', {
+      params: { keyword }
+    }),
+
+  getById: (id) =>
+    api.get(`/title/anime/${id}`),
+
+  getByServiceId: (integrationId) =>
+    api.get('/title/anime/getByServiceId', {
+      params: { id: integrationId }
+    }),
+
+  create: (anime, userId) =>
+    api.post('/title/anime', anime, {
+      headers: { userId }
+    }),
+
+  update: (anime, userId) =>
+    api.put('/title/anime', anime, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/anime', {
+      headers: { id, userId }
+    })
+};
+
 export default api;

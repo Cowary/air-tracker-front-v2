@@ -21,21 +21,29 @@
       </div>
       <div class="hero-visual">
         <div class="card-grid">
-          <div class="media-card card-1">
+          <router-link to="/anime" class="media-card card-1">
+            <span class="card-icon">🎌</span>
+            <span>Аниме</span>
+          </router-link>
+          <router-link to="/media" class="media-card card-2">
             <span class="card-icon">🎬</span>
             <span>Фильмы</span>
-          </div>
-          <div class="media-card card-2">
+          </router-link>
+          <div class="media-card card-3">
             <span class="card-icon">📺</span>
             <span>Сериалы</span>
           </div>
-          <div class="media-card card-3">
+          <div class="media-card card-4">
             <span class="card-icon">🎮</span>
             <span>Игры</span>
           </div>
-          <div class="media-card card-4">
+          <div class="media-card card-5">
             <span class="card-icon">📚</span>
             <span>Книги</span>
+          </div>
+          <div class="media-card card-6">
+            <span class="card-icon">📕</span>
+            <span>Манга</span>
           </div>
         </div>
       </div>

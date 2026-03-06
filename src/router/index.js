@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import MediaListPage from '../views/MediaListPage.vue';
 import LoginPage from '../views/LoginPage.vue';
+import AnimePage from '../views/AnimePage.vue';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/media',
     name: 'MediaList',
     component: MediaListPage
+  },
+  {
+    path: '/anime',
+    name: 'Anime',
+    component: AnimePage
   },
   {
     path: '/login',
