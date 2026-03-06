@@ -11,6 +11,7 @@
     <div class="hero">
       <div class="hero-content">
         <h1>Air Tracker</h1>
+        <span class="version">v{{ version }}</span>
         <p>Отслеживайте ваши любимые фильмы, сериалы, аниме, игры и книги в одном месте</p>
         <router-link to="/media" class="btn-primary">
           Перейти к списку медиа
@@ -55,8 +56,10 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { authApi } from '../api';
+import packageJson from '../../package.json';
 
 const router = useRouter();
+const version = packageJson.version;
 
 onMounted(async () => {
   const token = localStorage.getItem('token');
@@ -122,8 +125,15 @@ const handleLogout = () => {
   font-size: 3.5rem;
   font-weight: 700;
   color: #1a1a2e;
-  margin: 0 0 1rem;
+  margin: 0 0 0.25rem;
   letter-spacing: -0.02em;
+}
+
+.version {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
 }
 
 .hero-content p {
