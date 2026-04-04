@@ -26,10 +26,7 @@ pipeline {
         DEPLOY_USER     = 'sasha'
         DEPLOY_DIR      = '/home/sasha/docker/air-tracker-front'
         DEPLOY_CREDS   = 'v1-ssh-server'
-
-        // === Vite Build Args ===
-        // Переопределяется через параметр, здесь — значение по умолчанию
-        VITE_BACKEND_URL = 'http://192.168.1.77:8082'
+        BACKEND_URL     = 'http://192.168.1.74:8080'
     }
 
     tools {
@@ -43,11 +40,6 @@ pipeline {
             description: 'Branch to build and deploy from'
         )
         string(
-            name: 'VITE_BACKEND_URL',
-            defaultValue: env.VITE_BACKEND_URL ?: 'http://192.168.1.74:8080',
-            description: 'Backend URL for Vite build (API base URL)'
-        )
-        string(
             name: 'DEPLOY_HOST',
             defaultValue: env.DEPLOY_HOST ?: '192.168.1.79',
             description: 'Deployment target host IP'
@@ -56,6 +48,11 @@ pipeline {
             name: 'DEPLOY_ENABLED',
             choices: ['true', 'false'],
             description: 'Enable deployment stage'
+        )
+        string(
+            name: 'BACKEND_URL',
+            defaultValue: env.BACKEND_URL ?: 'http://192.168.1.74:8080',
+            description: 'Backend URL for nginx proxy (runtime, no rebuild needed)'
         )
     }
 
@@ -76,7 +73,6 @@ pipeline {
                 sh """
                     docker build \
                         -t ${IMAGE_NAME}:${IMAGE_TAG} \
-                        --build-arg VITE_BACKEND_URL=${params.VITE_BACKEND_URL} \
                         .
                 """
             }
@@ -135,8 +131,8 @@ pipeline {
                     sh """
                         ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${params.DEPLOY_HOST} '
                             cd ${DEPLOY_DIR} &&
-                            docker compose pull &&
-                            docker compose up -d
+                            BACKEND_URL=${params.BACKEND_URL} docker compose pull &&
+                            BACKEND_URL=${params.BACKEND_URL} docker compose up -d
                         '
                     """
                 }
