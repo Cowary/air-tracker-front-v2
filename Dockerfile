@@ -12,21 +12,9 @@ RUN npm run build
 # Production stage
 FROM nginx:alpine
 
-# Копируем шаблон конфига (не финальный конфиг)
+# Копируем шаблон конфига и entrypoint-скрипт
 COPY nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
-
-# Скрипт-обёртка: подставляет env-переменные в nginx конфиг при старте
-RUN cat > /docker-entrypoint.sh << 'EOF'
-#!/bin/sh
-set -e
-
-# Заменяем переменные в шаблоне nginx.conf
-envsubst '${BACKEND_URL}' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/default.conf
-
-# Запускаем оригинальный entrypoint nginx
-exec nginx -g 'daemon off;'
-EOF
-
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 COPY --from=builder /app/dist /usr/share/nginx/html
