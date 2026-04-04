@@ -44,6 +44,11 @@ pipeline {
             defaultValue: env.DEPLOY_HOST ?: '192.168.1.79',
             description: 'Deployment target host IP'
         )
+        string(
+            name: 'VITE_BACKEND_URL',
+            defaultValue: env.VITE_BACKEND_URL ?: 'http://192.168.1.74:8080',
+            description: 'Backend URL (runtime, changed via BACKEND_URL env)'
+        )
         choice(
             name: 'DEPLOY_ENABLED',
             choices: ['true', 'false'],
@@ -52,7 +57,7 @@ pipeline {
         string(
             name: 'BACKEND_URL',
             defaultValue: env.BACKEND_URL ?: 'http://192.168.1.74:8080',
-            description: 'Backend URL for nginx proxy (runtime, no rebuild needed)'
+            description: 'Backend URL (runtime, injected into config.js at startup)'
         )
     }
 
@@ -73,6 +78,7 @@ pipeline {
                 sh """
                     docker build \
                         -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                        --build-arg VITE_BACKEND_URL=${params.VITE_BACKEND_URL} \
                         .
                 """
             }

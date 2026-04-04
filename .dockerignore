@@ -12,3 +12,5 @@ dist
 QWEN.md
 KODA.md
 README.md
+nginx.conf.template
+docker-entrypoint.sh

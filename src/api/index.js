@@ -1,7 +1,16 @@
 import axios from 'axios';
 
+// Runtime-конфиг: подставляется BACKEND_URL при старте контейнера
+// Если не задано — используется значение из VITE_BACKEND_URL (время сборки)
+const getBackendUrl = () => {
+  if (typeof window !== 'undefined' && window.APP_CONFIG?.BACKEND_URL) {
+    return window.APP_CONFIG.BACKEND_URL;
+  }
+  return import.meta.env.VITE_BACKEND_URL || '';
+};
+
 const api = axios.create({
-  baseURL: '',
+  baseURL: getBackendUrl(),
   headers: {
     'Content-Type': 'application/json'
   }
