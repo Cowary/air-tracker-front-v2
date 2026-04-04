@@ -32,6 +32,10 @@ pipeline {
         VITE_BACKEND_URL = 'http://192.168.1.74:8080'
     }
 
+    tools {
+        dockerTool 'docker'
+    }
+
     parameters {
         string(
             name: 'BRANCH_NAME',
