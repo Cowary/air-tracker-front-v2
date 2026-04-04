@@ -22,14 +22,14 @@ pipeline {
         DHUB_IMAGE      = "${DHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
 
         // === Deployment ===
-        DEPLOY_HOST     = '192.168.1.79'
+        DEPLOY_HOST     = '192.168.1.77'
         DEPLOY_USER     = 'sasha'
         DEPLOY_DIR      = '/home/sasha/docker/air-tracker-front'
         DEPLOY_CREDS   = 'v1-ssh-server'
 
         // === Vite Build Args ===
         // Переопределяется через параметр, здесь — значение по умолчанию
-        VITE_BACKEND_URL = 'http://192.168.1.74:8080'
+        VITE_BACKEND_URL = 'http://192.168.1.77:8082'
     }
 
     tools {
