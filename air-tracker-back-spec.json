@@ -6,8 +6,14 @@
   },
   "servers": [
     {
-      "url": "http://192.168.1.74:8080",
+      "url": "http://localhost:8080",
       "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Health",
+      "description": "API для проверки работоспособности сервиса"
     }
   ],
   "paths": {
@@ -17,17 +23,6 @@
           "tv-controller"
         ],
         "operationId": "getAllByUsrId",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -136,17 +131,6 @@
           "ranobe-controller"
         ],
         "operationId": "getAllByUsrId_1",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -255,17 +239,6 @@
           "movie-controller"
         ],
         "operationId": "getAllByUsrId_2",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -374,17 +347,6 @@
           "manga-controller"
         ],
         "operationId": "getAllByUsrId_3",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -493,17 +455,6 @@
           "game-controller"
         ],
         "operationId": "getAllByUsrId_4",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -612,17 +563,6 @@
           "book-controller"
         ],
         "operationId": "getAllByUsrId_5",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -731,17 +671,6 @@
           "anime-controller"
         ],
         "operationId": "getAllByUsrId_6",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -867,6 +796,28 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/JwtResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверка работоспособности",
+        "description": "Возвращает статус работоспособности сервиса и текущую версию приложения",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Сервис работает корректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthDto"
                 }
               }
             }
@@ -1013,7 +964,7 @@
           {
             "name": "userId",
             "in": "header",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -2465,6 +2416,22 @@
         "properties": {
           "token": {
             "type": "string"
+          }
+        }
+      },
+      "HealthDto": {
+        "type": "object",
+        "description": "Информация о состоянии сервиса",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Версия приложения",
+            "example": "2.4.0"
+          },
+          "isHealthy": {
+            "type": "boolean",
+            "description": "Статус работоспособности сервиса",
+            "example": true
           }
         }
       },
