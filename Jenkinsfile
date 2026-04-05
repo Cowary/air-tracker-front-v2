@@ -133,7 +133,7 @@ pipeline {
                 sshagent(credentials: ['s2-server-ssh']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no sasha@192.168.1.77 '
-                            cd /home/sasha/docker/air-tracker &&
+                            cd /home/sasha/docker/art-tracker &&
                             docker compose pull &&
                             docker compose up -d
                         '
