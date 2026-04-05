@@ -27,6 +27,11 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+export const healthApi = {
+  getHealth: () =>
+    api.get('/v1/health')
+};
+
 export const authApi = {
   signIn: (username, password) =>
     api.post('/api/auth/sign-in', { username, password })

@@ -11,7 +11,14 @@
     <div class="hero">
       <div class="hero-content">
         <h1>Air Tracker</h1>
-        <span class="version">v{{ version }}</span>
+        <div class="versions">
+          <span class="version">Front: v{{ frontVersion }}</span>
+          <span v-if="backendVersion" class="version">Backend: v{{ backendVersion }}</span>
+          <span v-if="healthStatus !== null" class="health-status" :class="{ healthy: healthStatus, unhealthy: !healthStatus }">
+            <span class="status-dot"></span>
+            {{ healthStatus ? 'Backend подключен' : 'Backend недоступн' }}
+          </span>
+        </div>
         <p>Отслеживайте ваши любимые фильмы, сериалы, аниме, игры и книги в одном месте</p>
         <router-link to="/media" class="btn-primary">
           Перейти к списку медиа
@@ -57,19 +64,31 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { authApi } from '../api';
+import { authApi, healthApi } from '../api';
 import packageJson from '../../package.json';
 
 const router = useRouter();
-const version = packageJson.version;
+const frontVersion = packageJson.version;
+const backendVersion = ref(null);
+const healthStatus = ref(null);
 
 onMounted(async () => {
   const token = localStorage.getItem('token');
-  
+
   if (!token) {
     router.push('/login');
+  }
+
+  // Запрос health check backend
+  try {
+    const response = await healthApi.getHealth();
+    backendVersion.value = response.data.version;
+    healthStatus.value = response.data.isHealthy;
+  } catch (error) {
+    console.error('Health check failed:', error);
+    healthStatus.value = false;
   }
 });
 
@@ -137,7 +156,41 @@ const handleLogout = () => {
   display: inline-block;
   font-size: 0.875rem;
   color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.versions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   margin-bottom: 1rem;
+}
+
+.health-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+}
+
+.health-status.healthy {
+  color: #059669;
+  background: #ecfdf5;
+}
+
+.health-status.unhealthy {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .hero-content p {
