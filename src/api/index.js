@@ -51,13 +51,13 @@ export const animeApi = {
       headers: { userId }
     }),
 
+  getById: (titleId) =>
+    api.get(`/title/anime/${titleId}`),
+
   search: (keyword) =>
     api.get('/title/anime/find', {
       params: { keyword }
     }),
-
-  getById: (id) =>
-    api.get(`/title/anime/${id}`),
 
   getByServiceId: (integrationId) =>
     api.get('/title/anime/getByServiceId', {
@@ -76,6 +76,208 @@ export const animeApi = {
 
   delete: (id, userId) =>
     api.delete('/title/anime', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== MOVIE ====================
+
+export const movieApi = {
+  getAll: (userId) =>
+    api.get('/title/movie', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/movie/${titleId}`),
+
+  search: (keyword) =>
+    api.get('/title/movie/find', {
+      params: { keyword }
+    }),
+
+  getByServiceId: (integrationId) =>
+    api.get('/title/movie/getByServiceId', {
+      params: { id: integrationId }
+    }),
+
+  create: (movie, userId) =>
+    api.post('/title/movie', movie, {
+      headers: { userId }
+    }),
+
+  update: (movie, userId) =>
+    api.put('/title/movie', movie, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/movie', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== TV (Сериалы) ====================
+
+export const tvApi = {
+  getAll: (userId) =>
+    api.get('/title/tv', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/tv/${titleId}`),
+
+  search: (keyword) =>
+    api.get('/title/tv/find', {
+      params: { keyword }
+    }),
+
+  getByServiceId: (integrationId) =>
+    api.get('/title/tv/getByServiceId', {
+      params: { id: integrationId }
+    }),
+
+  create: (season, userId) =>
+    api.post('/title/tv', season, {
+      headers: { userId }
+    }),
+
+  update: (season, userId) =>
+    api.put('/title/tv', season, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/tv', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== MANGA ====================
+
+export const mangaApi = {
+  getAll: (userId) =>
+    api.get('/title/manga', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/manga/${titleId}`),
+
+  search: (keyword) =>
+    api.get('/title/manga/find', {
+      params: { keyword }
+    }),
+
+  getByServiceId: (integrationId) =>
+    api.get('/title/manga/getByServiceId', {
+      params: { id: integrationId }
+    }),
+
+  create: (manga, userId) =>
+    api.post('/title/manga', manga, {
+      headers: { userId }
+    }),
+
+  update: (manga, userId) =>
+    api.put('/title/manga', manga, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/manga', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== RANOBE ====================
+
+export const ranobeApi = {
+  getAll: (userId) =>
+    api.get('/title/ranobe', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/ranobe/${titleId}`),
+
+  search: (keyword) =>
+    api.get('/title/ranobe/find', {
+      params: { keyword }
+    }),
+
+  getByServiceId: (integrationId) =>
+    api.get('/title/ranobe/getByServiceId', {
+      params: { id: integrationId }
+    }),
+
+  create: (volume, userId) =>
+    api.post('/title/ranobe', volume, {
+      headers: { userId }
+    }),
+
+  update: (volume, userId) =>
+    api.put('/title/ranobe', volume, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/ranobe', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== GAME ====================
+
+export const gameApi = {
+  getAll: (userId) =>
+    api.get('/title/game', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/game/${titleId}`),
+
+  create: (game, userId) =>
+    api.post('/title/game', game, {
+      headers: { userId }
+    }),
+
+  update: (game, userId) =>
+    api.put('/title/game', game, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/game', {
+      headers: { id, userId }
+    })
+};
+
+// ==================== BOOK ====================
+
+export const bookApi = {
+  getAll: (userId) =>
+    api.get('/title/book', {
+      headers: { userId }
+    }),
+
+  getById: (titleId) =>
+    api.get(`/title/book/${titleId}`),
+
+  create: (book, userId) =>
+    api.post('/title/book', book, {
+      headers: { userId }
+    }),
+
+  update: (book, userId) =>
+    api.put('/title/book', book, {
+      headers: { userId }
+    }),
+
+  delete: (id, userId) =>
+    api.delete('/title/book', {
       headers: { id, userId }
     })
 };

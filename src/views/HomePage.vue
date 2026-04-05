@@ -26,26 +26,30 @@
             <span class="card-icon">🎌</span>
             <span>Аниме</span>
           </router-link>
-          <router-link to="/media" class="media-card card-2">
+          <router-link to="/movies" class="media-card card-2">
             <span class="card-icon">🎬</span>
             <span>Фильмы</span>
           </router-link>
-          <div class="media-card card-3">
+          <router-link to="/tv" class="media-card card-3">
             <span class="card-icon">📺</span>
             <span>Сериалы</span>
-          </div>
-          <div class="media-card card-4">
+          </router-link>
+          <router-link to="/games" class="media-card card-4">
             <span class="card-icon">🎮</span>
             <span>Игры</span>
-          </div>
-          <div class="media-card card-5">
+          </router-link>
+          <router-link to="/books" class="media-card card-5">
             <span class="card-icon">📚</span>
             <span>Книги</span>
-          </div>
-          <div class="media-card card-6">
+          </router-link>
+          <router-link to="/manga" class="media-card card-6">
             <span class="card-icon">📕</span>
             <span>Манга</span>
-          </div>
+          </router-link>
+          <router-link to="/ranobe" class="media-card card-7">
+            <span class="card-icon">📖</span>
+            <span>Ранобе</span>
+          </router-link>
         </div>
       </div>
     </div>
@@ -172,6 +176,7 @@ const handleLogout = () => {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  max-width: 400px;
 }
 
 .media-card {
@@ -186,6 +191,7 @@ const handleLogout = () => {
   font-size: 0.875rem;
   font-weight: 500;
   color: #374151;
+  text-decoration: none;
   transition: transform 0.3s;
 }
 
@@ -201,6 +207,9 @@ const handleLogout = () => {
 .card-2 { animation: float 3s ease-in-out infinite 0.5s; }
 .card-3 { animation: float 3s ease-in-out infinite 1s; }
 .card-4 { animation: float 3s ease-in-out infinite 1.5s; }
+.card-5 { animation: float 3s ease-in-out infinite 2s; }
+.card-6 { animation: float 3s ease-in-out infinite 2.5s; }
+.card-7 { animation: float 3s ease-in-out infinite 3s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }

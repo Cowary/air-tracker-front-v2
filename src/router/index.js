@@ -3,6 +3,12 @@ import HomePage from '../views/HomePage.vue';
 import MediaListPage from '../views/MediaListPage.vue';
 import LoginPage from '../views/LoginPage.vue';
 import AnimePage from '../views/AnimePage.vue';
+import MoviePage from '../views/MoviePage.vue';
+import TvPage from '../views/TvPage.vue';
+import MangaPage from '../views/MangaPage.vue';
+import RanobePage from '../views/RanobePage.vue';
+import GamePage from '../views/GamePage.vue';
+import BookPage from '../views/BookPage.vue';
 
 const routes = [
   {
@@ -19,6 +25,36 @@ const routes = [
     path: '/anime',
     name: 'Anime',
     component: AnimePage
+  },
+  {
+    path: '/movies',
+    name: 'Movies',
+    component: MoviePage
+  },
+  {
+    path: '/tv',
+    name: 'Tv',
+    component: TvPage
+  },
+  {
+    path: '/manga',
+    name: 'Manga',
+    component: MangaPage
+  },
+  {
+    path: '/ranobe',
+    name: 'Ranobe',
+    component: RanobePage
+  },
+  {
+    path: '/games',
+    name: 'Games',
+    component: GamePage
+  },
+  {
+    path: '/books',
+    name: 'Books',
+    component: BookPage
   },
   {
     path: '/login',
