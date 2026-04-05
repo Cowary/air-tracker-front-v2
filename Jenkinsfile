@@ -130,7 +130,7 @@ pipeline {
 
         stage('Deploy to Home Server') {
             steps {
-                sshagent(credentials: ['s2-ssh-server']) {
+                sshagent(credentials: ['s2-server-ssh']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no sasha@192.168.1.77 '
                             cd /home/sasha/docker/air-tracker &&
