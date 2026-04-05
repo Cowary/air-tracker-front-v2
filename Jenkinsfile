@@ -128,17 +128,14 @@ pipeline {
             }
         }
 
-        stage('Deploy to Server') {
-            when {
-                expression { params.DEPLOY_ENABLED == 'true' }
-            }
+        stage('Deploy to Home Server') {
             steps {
-                sshagent(credentials: [env.DEPLOY_CREDS]) {
+                sshagent(credentials: ['s2-ssh-server']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${params.DEPLOY_HOST} '
-                            cd ${DEPLOY_DIR} &&
-                            BACKEND_URL=${params.BACKEND_URL} docker compose pull &&
-                            BACKEND_URL=${params.BACKEND_URL} docker compose up -d
+                        ssh -o StrictHostKeyChecking=no sasha@192.168.1.77 '
+                            cd /home/sasha/docker/air-tracker &&
+                            docker compose pull &&
+                            docker compose up -d
                         '
                     """
                 }
